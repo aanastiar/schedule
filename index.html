@@ -4,16 +4,29 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>schedule</title>
+  <style>
+    table {
+      text-align: center;
+      margin: auto;
+      border-collapse: collapse;
+    }
+    caption {
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+    th, td {
+      border: 1px solid black;
+      padding: 8px;
+    }
+  </style>
 </head>
-<!-- th = table head -->
- <!-- tr = table rows (baris) -->
 <body>
-  <table border="all" align="center" style="text-align: center; margin-left: auto; margin-right: auto; border-collapse: collapse">
-    <caption> <strong>Class 12 schedule</strong></caption>
+  <table>
+    <caption>Class 12 schedule</caption>
     <tr>
       <th>Monday</th>
       <td>design</td>
-      <td>Indonesia language</td></td>
+      <td>Indonesia language</td>
       <td>code</td>
       <td>citizen education</td>
       <td>entrepreneur</td>
@@ -44,7 +57,7 @@
     </tr>
     <tr>
       <th>Friday</th>
-      <td>Math</td>
+      <td>math</td>
       <td>animation</td>
       <td>sport</td>
     </tr>
@@ -55,5 +68,55 @@
     <tr>
       <th>Sunday</th>
     </tr>
+  </table>
+
+  <script>
+    // Warna cukup diatur sekali di sini
+    const colorMap = {
+      "math": "red",
+      "animation": "brown",
+      "entrepreneur": "purple",
+      "pai": "greenyellow",
+      "pav": "lightblue",
+      "code": "lightgreen",
+      "design": "lightcoral",
+      "english language": "lightcyan",
+      "indonesia language": "khaki",
+      "citizen education": "lightsalmon",
+      "cultural art": "lightpink",
+      "sport": "gray",
+      "fiqih": "plum"
+    };
+
+    document.querySelectorAll("td").forEach(td => {
+      // ambil teks bersih + huruf kecil tanpa jam
+      let text = td.textContent.trim().toLowerCase();
+      // hilangkan jam jika ada dalam tanda kurung
+      text = text.replace(/\(.*?\)/g, '').trim();
+
+      if (colorMap[text]) {
+        td.style.backgroundColor = colorMap[text];
+        // Jika warna gelap, ganti warna teks putih otomatis
+        if (["brown", "purple", "gray", "red"].includes(colorMap[text])) {
+          td.style.color = "white";
+        }
+      }
+    });
+    
+  </script>
+  <script>alert("Selamat Belajar :) ")</script>
+  <p id="jam"></p>
+
+<script>
+function updateJam() {
+  let sekarang = new Date();
+  let jam = sekarang.getHours();
+  let menit = sekarang.getMinutes();
+  let detik = sekarang.getSeconds();
+  document.getElementById("jam").textContent = jam + ":" + menit + ":" + detik;
+}
+setInterval(updateJam, 1000); // update setiap 1 detik
+</script>
+
 </body>
 </html>
